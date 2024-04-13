@@ -1,8 +1,8 @@
 //css file
 import './App.css'
 import Compny from './Components/Compny'
-import Employee from './Components/Employee'
-
+import Employee from './Components/Compny'
+import Car from './Components/Car'
 
 //component is simply a function
 function App() {
@@ -18,6 +18,7 @@ function App() {
       <p id="p1">Lorem ipsum dolor sit amet consectetur adipisicing elit. Odio cum aspernatur dolorem ex rem quasi sit ducimus quam veritatis error, similique consequuntur minima, corrupti laborum! Ex hic cum autem nostrum.</p>
       <Employee name={empName} status desig={false} check="emp values"/>
       <Compny/>
+      <Car/>
     </>
   )
 }
