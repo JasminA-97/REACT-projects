@@ -10,7 +10,12 @@ function Usr({name,companyName,place,district}) {
          <p id={myownstyle.group3}>child of company</p>   
         <h5>Usr details (child of company)</h5>
         <ul>
-            <h6>user name: {name}</h6>
+            {/* conditional Rendering: for 'if-else' statement, use ternary operator ?: */}
+            { name ?
+                <h6>user name: {name}</h6>
+             :
+              <p className="text-danger">Nothing to display</p>
+            }
             <h6>companyName: {companyName}</h6>
             <h6>place: {place}</h6>
             <h6>district: {district}</h6>

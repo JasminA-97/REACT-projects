@@ -19,7 +19,7 @@ function Compny() {
           <div className='ms-5 ps-5 m-5'>
             <input onChange={(event)=>showcontent(event.target.value)} type="text" className="form-control w-50" />
           </div>
-          <Usr name={'alfiya'} companyName={cName} place={place} district={dst}/>
+          <Usr name={''} companyName={cName} place={place} district={dst}/>
           </>
      
   )
