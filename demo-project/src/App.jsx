@@ -4,6 +4,8 @@ import Compny from './Components/Compny'
 import Employee from './Components/Compny'
 import Car from './Components/Car'
 import { useState } from 'react'
+import Counter from './Components/Counter'
+
 
 //component is simply a function
 function App() {
@@ -20,6 +22,8 @@ function App() {
 
   return (//jsx code
     <>
+      <Counter/>
+
       <h1 style={h1Style}>Demo Project</h1>                                                 {/* inline css */}
       <h4  style={{textAlign:'center',color:'red',margin:'10px'}}>Luminar</h4>              {/* inline css */}
       <h3 className='text-primary text-center'>by {empName}</h3>                             {/*bootsrap */}
@@ -27,6 +31,7 @@ function App() {
       <Employee name={empName} status desig={false} check="emp values"/>
       <Compny/>
       <Car/>
+      
 
 {/*`````````````` useState()``````````````*/}
     <div className="text-center m-5">
