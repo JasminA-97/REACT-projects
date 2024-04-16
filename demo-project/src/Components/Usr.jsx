@@ -48,7 +48,7 @@ console.log(data);
       <tbody>
         {
           
-          data.map(item=>(
+          data?.map(item=>(
             <tr key={item}>
             <td>{item?.name}</td>
             <td>{item?.email}</td>
