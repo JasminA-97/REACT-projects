@@ -1,0 +1,22 @@
+.group1{
+    color:burlywood ;
+    text-align: center;
+    font-size: medium;
+    font-weight: 600;
+    text-decoration:overline;
+}
+
+.group2{
+    color: burlywood;
+    text-align: center;
+    font-size: medium;
+    font-weight:bold;
+    text-decoration: overline;
+}
+#group3{
+    color: burlywood;
+    text-align: center;
+    font-size: medium;
+    font-weight:lighter;
+    text-decoration: underline;
+}
