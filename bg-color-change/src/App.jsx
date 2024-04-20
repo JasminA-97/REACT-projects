@@ -26,6 +26,7 @@ function App() {
             <FaArrowCircleDown className='arrow-icon' onClick={toggleColorDiv} />
           ) : (
             <IoColorPaletteSharp style={{fontSize:'100'}} className='btn arrow-icon text-warning' onClick={toggleColorDiv}/>
+            
           )}
   
           {/* Conditional rendering based on showColorDiv state */}
