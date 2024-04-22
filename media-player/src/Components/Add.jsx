@@ -1,7 +1,5 @@
 import React,{useState} from 'react'
-import { Button, Modal } from 'react-bootstrap'
-
-
+import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
 
 function Add() {
     const [show, setShow] = useState(false);
@@ -27,6 +25,17 @@ function Add() {
         </Modal.Header>
         <Modal.Body>
           <p>Please fill the following details!!!</p>
+          <div className="border rounded p-3">
+            <FloatingLabel className="mb-3" controlId="floatingInputCaption" label="Video Caption">
+              <Form.Control type="text" placeholder="Video Caption" />
+            </FloatingLabel>
+            <FloatingLabel className="mb-3" controlId="floatingInputImage" label="Image URL">
+              <Form.Control type="text" placeholder="Image URL" />
+            </FloatingLabel>
+            <FloatingLabel className="mb-3" controlId="floatingInputURL" label="Youtube URL">
+              <Form.Control type="text" placeholder="Youtube URL" />
+            </FloatingLabel>
+          </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
