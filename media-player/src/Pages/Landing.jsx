@@ -2,7 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import landingImg from '../assets/music-beat.gif'
 import music1 from '../assets/music1.png'
-import music2 from '../assets/music2.webp'
+import music2 from '../assets/music2.gif'
 import music3 from '../assets/music3.webp'
 import { Card } from 'react-bootstrap'
 
@@ -88,7 +88,7 @@ function Landing() {
   </div>
   <div className="col"></div>
   <div className="col-lg-6">
-    {/* width='100%' height='360' */}
+    <iframe width='100%' height='360' src="https://www.youtube.com/embed/Po3jStA673E?si=1ZWTmL1kvyI573NE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
   </div>
 </div>
    

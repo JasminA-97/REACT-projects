@@ -2,11 +2,36 @@ import React,{useState} from 'react'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
 
 function Add() {
-    const [show, setShow] = useState(false);
-
+  const[invalidYoutubeURL,setInvalidURL]=useState(false)
+  const[videoDetails,setVideoDetails]=useState({caption:"",imageURL:"",youtubeURL:""})
+  const [show, setShow] = useState(false);
+console.log(videoDetails);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const getEmbedURL=(link)=>{
+  // <iframe width="560" height="315" src="https://www.youtube.com/embed/tOM-nWPcR4U?si=EDJMWMslnTUyH10Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+  // https://www.youtube.com/watch?v=tOM-nWPcR4U
+  if(link.includes('v=')){
+    let videoId=link.split('v')[1].slice(0,11)
+    console.log(videoId);
+    setVideoDetails({...videoDetails,youtubeURL:`https://www.youtube.com/embed/${videoId}`})
+    setInvalidURL(false)
+  }else{
+    setVideoDetails({...videoDetails,youtubeURL:""})
+    setInvalidURL(true)
+  }
 
+  }
+  const handleUpload=()=>{
+    console.log("inside handle upload fn");
+    //const{key,key2...}=object-name
+    const {caption,imageURL,youtubeURL}=videoDetails
+    if(caption&& imageURL&&youtubeURL){
+      console.log('api call');
+    }else{
+      alert('pls fill the form completely!!!')
+    }
+  }
   return (
     <>
     <div className="d-flex align-items-center">
@@ -27,21 +52,24 @@ function Add() {
           <p>Please fill the following details!!!</p>
           <div className="border rounded p-3">
             <FloatingLabel className="mb-3" controlId="floatingInputCaption" label="Video Caption">
-              <Form.Control type="text" placeholder="Video Caption" />
+              <Form.Control onChange={e=>setVideoDetails({...videoDetails,caption:e.target.value})} type="text" placeholder="Video Caption" />
             </FloatingLabel>
             <FloatingLabel className="mb-3" controlId="floatingInputImage" label="Image URL">
-              <Form.Control type="text" placeholder="Image URL" />
+              <Form.Control  onChange={e=>setVideoDetails({...videoDetails,imageURL:e.target.value})} type="text" placeholder="Image URL" />
             </FloatingLabel>
             <FloatingLabel className="mb-3" controlId="floatingInputURL" label="Youtube URL">
-              <Form.Control type="text" placeholder="Youtube URL" />
+              <Form.Control onChange={e=>getEmbedURL(e.target.value)} type="text" placeholder="Youtube URL" />
             </FloatingLabel>
+            {
+            invalidYoutubeURL&& <div className='text-danger fw-bolder'>Invalid Youtube Link</div>
+            }
           </div>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary">Upload</Button>
+          <Button onClick={handleUpload} className='btn btn-info' >Upload</Button>
         </Modal.Footer>
       </Modal>
     </>
