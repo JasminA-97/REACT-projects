@@ -1,6 +1,7 @@
 import React,{useState} from 'react'
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
-
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Add() {
   const[invalidYoutubeURL,setInvalidURL]=useState(false)
   const[videoDetails,setVideoDetails]=useState({caption:"",imageURL:"",youtubeURL:""})
@@ -29,7 +30,7 @@ console.log(videoDetails);
     if(caption&& imageURL&&youtubeURL){
       console.log('api call');
     }else{
-      alert('pls fill the form completely!!!')
+      toast.warning('pls fill the form completely!!!')
     }
   }
   return (
@@ -72,6 +73,7 @@ console.log(videoDetails);
           <Button onClick={handleUpload} className='btn btn-info' >Upload</Button>
         </Modal.Footer>
       </Modal>
+      <ToastContainer position='top-center' theme='colored' autoClose={3000}/>
     </>
   )
 }

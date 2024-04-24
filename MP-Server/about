@@ -1,0 +1,58 @@
+//  key must be string that is the difference bw js-object
+json-server-npm
+    https://www.npmjs.com/package/json-server
+    > npm install json-server(for installation)
+    > $ npx json-server db.json(for run)
+
+
+<!-- C:\Users\USER\Desktop\Luminar\REACT\MP-Server>npm init -y
+Wrote to C:\Users\USER\Desktop\Luminar\REACT\MP-Server\package.json:
+
+{
+  "name": "mp-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
+
+
+
+C:\Users\USER\Desktop\Luminar\REACT\MP-Server>code .
+
+C:\Users\USER\Desktop\Luminar\REACT\MP-Server>npm install json-server
+
+added 54 packages, and audited 55 packages in 9s
+
+15 packages are looking for funding
+  run `npm fund` for details
+
+found 0 vulnerabilities
+
+C:\Users\USER\Desktop\Luminar\REACT\MP-Server>npx json-server db.json
+JSON Server started on PORT :3000
+Press CTRL-C to stop
+Watching db.json...
+
+(˶ᵔ ᵕ ᵔ˶)
+
+Index:
+http://localhost:3000/
+
+Static files:
+Serving ./public directory if it exists
+
+Endpoints:
+http://localhost:3000/allVideos
+http://localhost:3000/history
+http://localhost:3000/allCategory -->
+
+in mediaplayer cmd
+Axios is a promise-based HTTP Client for node.js and the browser. 
+    https://www.npmjs.com/package/axios
+        > npm i axios
