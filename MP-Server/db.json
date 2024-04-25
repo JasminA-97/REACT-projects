@@ -1,7 +1,36 @@
-
 {
-    "allVideos":[],
-    "history":[],
-    "allCategory":[]
-    
+  "allVideos": [
+    {
+      "id": "5051",
+      "caption": "Avesham Trailer",
+      "imageURL": "https://th.bing.com/th/id/OIP.yRAeJYYp6kE0zDyp09VkPwHaD2?rs=1&pid=ImgDetMain",
+      "youtubeURL": "https://www.youtube.com/embed/=tOM-nWPcR4"
+    },
+    {
+      "id": "67df",
+      "caption": "Avesham Trailer",
+      "imageURL": "https://th.bing.com/th/id/OIP.yRAeJYYp6kE0zDyp09VkPwHaD2?rs=1&pid=ImgDetMain",
+      "youtubeURL": "https://www.youtube.com/embed/=tOM-nWPcR4"
+    },
+    {
+      "id": "1e94",
+      "caption": "Avesham Trailer",
+      "imageURL": "https://th.bing.com/th/id/OIP.yRAeJYYp6kE0zDyp09VkPwHaD2?rs=1&pid=ImgDetMain",
+      "youtubeURL": "https://www.youtube.com/embed/=tOM-nWPcR4"
+    },
+    {
+      "id": "58d7",
+      "caption": "Leo Trailer",
+      "imageURL": "https://d2h7z5r5pp4sed.cloudfront.net/tamil/gallery/movies/leo2023/main.jpg",
+      "youtubeURL": "https://www.youtube.com/embed/=Po3jStA673"
+    },
+    {
+      "id": "eca2",
+      "caption": "Varshangalkku Shesham",
+      "imageURL": "https://th.bing.com/th/id/OIF.p1hPVyXE7HIEFUrQiljFwQ?rs=1&pid=ImgDetMain",
+      "youtubeURL": "https://www.youtube.com/embed/=50GJ7D_00N"
+    }
+  ],
+  "history": [],
+  "allCategory": []
 }
