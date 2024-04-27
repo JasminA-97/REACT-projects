@@ -3,7 +3,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from '@mui/material/TextField';
-import { Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, Tooltip } from '@mui/material';
+import { Alert, Box, Button, Dialog, DialogActions, DialogContent, DialogTitle, FormControl, FormControlLabel, FormLabel, InputLabel, MenuItem, Radio, RadioGroup, Select, Stack, Tooltip } from '@mui/material';
 
 function App() {
   const [selectedDate, setSelectedDate] = useState(null);
@@ -23,6 +23,8 @@ function App() {
   const [course, setCourse] = useState("");
   const [courseErr, setCourseErr] = useState(false);
   const [openModal, setOpenModal] = useState(false);
+  const [uploadSuccess, setUploadSuccess] = useState(false); // State to manage upload success message
+
 
   const handleName = (tag) => {
     const { id, value } = tag;
@@ -36,14 +38,12 @@ function App() {
   };
 
   const handleDateChange = (date) => {
-    setSelectedDate(date);
-    // Clear DOB error when selecting a valid date
-    setDobError(false);
-     // Check if DOB is not selected
-     if (!selectedDate) {
-      setDobError(true);
-    }
-  };
+  setSelectedDate(date);
+  // Check if a valid date is selected
+  setDobError(!date); // Set error if date is not selected (null or undefined)
+  
+};
+
 
   const handleGender = (genderval) => {
     setGender(genderval);
@@ -100,10 +100,20 @@ function App() {
     setOpenModal(false);
   };
 
+  const handleUpload = () => {
+    setUploadSuccess(true); // Set upload success to true to show the success message
+    setTimeout(() => {
+      setUploadSuccess(false); // Reset upload success after 2 seconds
+      setOpenModal(false); // Close the modal
+      handleReset(); // Reset the form
+    }, 3000);
+  };
+
+
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
       <div style={{ minHeight: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-        <div className="border shadow p-5">
+        <div className=" border shadow p-5 bg-light">
           <h1 className="text-dark text-center mb-3"><i className="fa-brands fa-square-pied-piper"></i> YourAcademy</h1>
           <div>
             <h4 className='bg-info rounded p-2 text-light text-center mb-3'>STUDENT REGISTRATION FORM</h4>
@@ -139,9 +149,9 @@ function App() {
                   value={gender}
                   onChange={(e) => handleGender(e.target.value)}
                 >
-                  <FormControlLabel value="female" control={<Radio />} label="Female" />
-                  <FormControlLabel value="male" control={<Radio />} label="Male" />
-                  <FormControlLabel value="other" control={<Radio />} label="Other" />
+                  <FormControlLabel value="Female" control={<Radio />} label="Female" />
+                  <FormControlLabel value="Male" control={<Radio />} label="Male" />
+                  <FormControlLabel value="Other" control={<Radio />} label="Other" />
                 </RadioGroup>
               </FormControl>
             </Stack>
@@ -178,35 +188,69 @@ function App() {
                   label="course"
                   onChange={(e) => handleCourse(e.target.value)}
                 >
-                  <MenuItem value={'sci'}>Science</MenuItem>
-                  <MenuItem value={'math'}>Maths</MenuItem>
-                  <MenuItem value={'eng'}>English</MenuItem>
-                  <MenuItem value={'hist'}>History</MenuItem>
+                  <MenuItem value={'Science'}>Science</MenuItem>
+                  <MenuItem value={'Maths'}>Maths</MenuItem>
+                  <MenuItem value={'English'}>English</MenuItem>
+                  <MenuItem value={'History'}>History</MenuItem>
                 </Select>
               </FormControl>
             </Stack>
-            {courseErr && <div className="mb-2 text-danger fw-bolder">Invalid Course!!!</div>}
-            <Stack spacing={2} direction={'row'} className='pt-3 justify-content-center '>
-              <Button type='submit' disabled={fnameErr || lnameErr ||dobError|| emailErr || phoneErr || addressErr || courseErr} variant="contained" className='p-2'>Register</Button>
+            {courseErr && <div className="mb-1 text-danger fw-bolder">Invalid Course!!!</div>}
+            <Stack spacing={2} direction={'row'} className='pt-3 mb-0 justify-content-center '>
+              <Button type='submit' disabled={fnameErr || lnameErr || dobError|| emailErr || phoneErr || addressErr || courseErr} variant="contained" className='p-2'>Register</Button>
               <Button onClick={handleReset} variant="outlined" className='p-2'>Reset</Button>
             </Stack>
           </form>
-          <Dialog open={openModal} onClose={handleCloseModal}>
-            <DialogTitle>Registration Details</DialogTitle>
-            <DialogContent>
-              <p><strong>Name:</strong> {fname} {lname}</p>
-              <p><strong>Date of Birth:</strong> {selectedDate ? selectedDate.format('MM/DD/YYYY') : ''}</p>
-              <p><strong>Gender:</strong> {gender}</p>
-              <p><strong>Email:</strong> {email}</p>
-              <p><strong>Phone:</strong> {phone}</p>
-              <p><strong>Address:</strong> {address}</p>
-              <p><strong>Course:</strong> {course}</p>
+          <Dialog open={openModal} onClose={handleCloseModal} fullWidth>
+            <DialogTitle className='m-2'>Confirm Registration Details</DialogTitle>
+            <DialogContent dividers>
+            <table className='d-flex align-items-center justify-content-center' style={{borderCollapse: 'collapse', width: '100%',}}>
+                <tbody>
+                  <tr>
+                    <th style={{ textAlign: 'left', paddingRight: '20px' }}>Name:</th>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{`${fname} ${lname}`}</td>
+                  </tr>
+                  <tr>
+                    <th style={{ textAlign: 'left', paddingRight: '20px' }}>Date of Birth:</th>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{selectedDate ? selectedDate.format('MM/DD/YYYY') : ''}</td>
+                  </tr>
+                  <tr>
+                    <th style={{ textAlign: 'left', paddingRight: '20px' }}>Gender:</th>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{gender}</td>
+                  </tr>
+                  <tr>
+                    <th style={{ textAlign: 'left', paddingRight: '20px' }}>Email:</th>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{email}</td>
+                  </tr>
+                  <tr>
+                    <th style={{ textAlign: 'left', paddingRight: '20px' }}>Phone:</th>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{phone}</td>
+                  </tr>
+                  <tr>
+                    <th style={{ textAlign: 'left', paddingRight: '20px' }}>Address:</th>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{address}</td>
+                  </tr>
+                  <tr>
+                    <th style={{ textAlign: 'left', paddingRight: '20px' }}>Course:</th>
+                    <td style={{ textAlign: 'left', padding: '8px' }}>{course}</td>
+                  </tr>
+                </tbody>
+             </table>
+
+              
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCloseModal} color="primary">Edit</Button>
-              <Button onClick={handleCloseModal} color="primary">Upload</Button>
+            <Button variant="contained" className='bg-secondary' onClick={handleCloseModal} disabled={uploadSuccess} >Edit</Button>
+              <Button variant="contained" className='bg-success' onClick={handleUpload} disabled={uploadSuccess} >Upload</Button>
             </DialogActions>
+            {/* Render success alert based on uploadSuccess state */}
+          {uploadSuccess && (
+              <Alert variant="filled" severity="success">
+              Uploaded Successfully!!!
+            </Alert>
+          )}
           </Dialog>
+          
         </div>
       </div>
     </LocalizationProvider>
