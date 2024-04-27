@@ -3,7 +3,7 @@ import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { addVideoAPI } from '../../Services/allAPI';
-function Add() {
+function Add({setAddVideoResponse}) {
   const[invalidYoutubeURL,setInvalidURL]=useState(false)
   const[videoDetails,setVideoDetails]=useState({caption:"",imageURL:"",youtubeURL:""})
   const [show, setShow] = useState(false);
@@ -35,6 +35,7 @@ console.log(videoDetails);
         console.log(result);
         if(result.status>=200 && result.status<300){
           console.log(result.data);
+          setAddVideoResponse(result.data)
           toast.success(`${result.data.caption }added to your collection!!!`)
           handleClose()
         }else{
