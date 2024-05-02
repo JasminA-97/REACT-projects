@@ -10,7 +10,7 @@ export const addVideoAPI = async (video) =>{
 export const getAllVideoAPI=async ()=>{
     return await commonAPI("GET",`${SERVER_URL}/allVideos`,"")
 }
-//remove all video called by videoCard component
+//remove video called by videoCard component
 export const removeVideoAPI = async (videoId)=>{
     return await commonAPI("DELETE",`${SERVER_URL}/allVideos/${videoId}`,{})
 }
@@ -19,16 +19,30 @@ export const saveHistoryAPI = async (video)=>{
     return await commonAPI("POST",`${SERVER_URL}/history`,video)
 }
 
-//getvideo history called by videoCard component
+//getvideo history called by history component
 export const getVideoHistoryAPI = async ()=>{
     return await commonAPI("GET",`${SERVER_URL}/history`,"")
 }
+
 //remove history called by history component
 export const removeHistoryAPI = async (videoId)=>{
     return await commonAPI("DELETE",`${SERVER_URL}/history/${videoId}`,{})
 }
+
 //add category called by category component
 export const addCategoryAPI = async (categoryDetails)=>{
     return await commonAPI("POST",`${SERVER_URL}/allCategory`,categoryDetails)
 }
+
+//get category called by category component
+export const getCategoryAPI = async ()=>{
+    return await commonAPI("GET",`${SERVER_URL}/allCategory`,"")
+}
+
+//remove category called by category component
+export const removeCategoryAPI = async (categoryId)=>{
+    return await commonAPI("DELETE",`${SERVER_URL}/allCategory/${categoryId}`,{})
+}
+
+
 

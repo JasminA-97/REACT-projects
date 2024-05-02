@@ -7,18 +7,20 @@ function VideoCard({displayData,setDeleteResponse}) {
   const[show,setShow]=useState(false);
 
   const handleClose=()=>setShow(false);
-  const handleShow=async()=>{
+  const handleShow = async() => {
     setShow(true);
-    const{caption,youtubeURL}=displayData
-    const systemTime=newDate()
-    const formatteDate = systemTime.toLocalString('en-US', {timeZoneName: 'short'});
-    console.log(formatteDate);
-    const videoHistory = {caption,youtubeURL,timeStamp:formatteDate}
+    const {caption,youtubeURL} = displayData
+    const systemTime=new Date() 
+    const formattedDate = systemTime.toLocaleString('en-US', { timeZoneName: 'short' });
+    console.log(formattedDate);
+    const videoHistory = {caption,youtubeURL,timeStamp:formattedDate}
     try{
       await saveHistoryAPI(videoHistory)
     }catch(err){
       console.log(err);
     }
+
+   
   }
   const handleRemoveVideo=async(videoId)=>{
     try{
