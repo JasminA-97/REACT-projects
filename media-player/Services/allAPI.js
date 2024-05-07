@@ -54,5 +54,9 @@ export const updateCategoryAPI = async (categoryId,categoryDetails)=>{
     return await commonAPI("PUT",`${SERVER_URL}/allCategory/${categoryId}`,categoryDetails)
 }
 
+//get a category called by view
 
+export const getSingleCategoryAPI = async (categoryId)=>{
+    return await commonAPI("GET",`${SERVER_URL}/allCategory/${categoryId}`,"")
+}
 

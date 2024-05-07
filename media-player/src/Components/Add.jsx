@@ -12,10 +12,11 @@ console.log(videoDetails);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const getEmbedURL=(link)=>{
-  // <iframe width="560" height="315" src="https://www.youtube.com/embed/tOM-nWPcR4U?si=EDJMWMslnTUyH10Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-  // https://www.youtube.com/watch?v=tOM-nWPcR4U
+// https://www.youtube.com/embed/Ry5K3LmtUL8
+console.log(link);
+    // https://www.youtube.com/watch?v=Ry5K3LmtUL8
   if(link.includes('v=')){
-    let videoId=link.split('v')[1].slice(0,11)
+    let videoId=link.split('v=')[1].slice(0,11)
     console.log(videoId);
     setVideoDetails({...videoDetails,youtubeURL:`https://www.youtube.com/embed/${videoId}`})
     setInvalidURL(false)
@@ -25,7 +26,7 @@ console.log(videoDetails);
   }
 
   }
-  const handleUpload=async()=>{
+  const handleUpload = async () =>{
     console.log("inside handle upload fn");
     //const{key,key2...}=object-name
     const {caption,imageURL,youtubeURL}=videoDetails
@@ -38,6 +39,7 @@ console.log(videoDetails);
           console.log(result.data);
           setAddVideoResponse(result.data)
           toast.success(`${result.data.caption }added to your collection!!!`)
+          setVideoDetails({caption:"",imageURL:"",youtubeURL:""})
           handleClose()
         }else{
           toast.error(result.response.data)

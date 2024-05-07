@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { addCategoryAPI, getAVideoAPI, getCategoryAPI, removeCategoryAPI, updateCategoryAPI } from '../../Services/allAPI';
+import { addCategoryAPI, getAVideoAPI, getCategoryAPI, removeCategoryAPI, removeVideoAPI, updateCategoryAPI } from '../../Services/allAPI';
 import { Button, FloatingLabel, Form, Modal } from 'react-bootstrap';
 import VideoCard from './VideoCard';
 
 
-function Category() {
+function Category({deleteVideoCategoryResponse,setRemoveCategoryVideoResponse}) {
   const [allCategories, setAllCategories] = useState([]) 
   const [categoryName,setCategoryName]=useState("")
   const [show, setShow] = useState(false);
@@ -17,7 +17,7 @@ function Category() {
   
   useEffect(()=>{
     getAllCategory()
-  },[])
+  },[deleteVideoCategoryResponse])
 
   const getAllCategory = async()=>{
     try{
@@ -32,6 +32,7 @@ function Category() {
       //apicall
         try{
         await addCategoryAPI({categoryName,allVideos:[]})
+        setCategoryName("")
         handleClose()
         getAllCategory()
 
@@ -66,12 +67,19 @@ function Category() {
       selectedCategory.allVideos.push(data)
       console.log(selectedCategory);
       await updateCategoryAPI(categoryId,selectedCategory)
+      const result = await removeVideoAPI(videoId)
+      setRemoveCategoryVideoResponse(result)
       getAllCategory()
     }catch(err){
       console.log(err);
     }
    }
-
+   const videoDragStarted = (e,videoDetails,categoryId)=>{
+    console.log(videoDetails,categoryId);
+    console.log("Video drag started from category");
+    let dataShare={categoryId,videoDetails}
+    e.dataTransfer.setData("dataShare",JSON.stringify(dataShare))
+   }
   return (
    <>
    <div className="d-flex justify-content-around">
@@ -92,8 +100,8 @@ function Category() {
               {
                 item.allVideos?.length>0 &&
                 item.allVideos?.map(video=>(
-                  <div key={video?.id} className="col-lg-6">
-                    <VideoCard displayData={video}/>
+                  <div draggable={true} onDragStart={e=>videoDragStarted(e,video,item.id)} key={video?.id} className="col-lg-6">
+                    <VideoCard displayData={video} insideCategory={true}/>
                   </div>
                 ))
               }
